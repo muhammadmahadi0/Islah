@@ -25,10 +25,19 @@ Fork of [islahbd/Islah](https://github.com/islahbd/Islah) — a static Bengali I
 
 ## Dark Mode Architecture
 
-- **Separate files** — `dark-mode.css` and `dark-mode.js` are standalone. Zero changes to `style.css` or `app.js`, making upstream merges trivial.
+- **Separate files** — `dark-mode.css` and `dark-mode.js` are standalone. Zero changes to `app.js`, making upstream merges trivial.
 - **Toggle** — Moon/sun icon button in the header.
 - **Persistence** — Saves to `localStorage('islah-dark-mode')`. Falls back to `prefers-color-scheme` media query.
 - **Class-based** — Adds/removes `body.dark` class. All dark rules are scoped under `body.dark`.
+
+## Glassmorphism Nav Bar
+
+Bottom fixed nav bar uses frosted glass effect:
+- `backdrop-filter: blur(24px)` with semi-transparent background
+- Active nav item has a subtle green glass background (`::before` pseudo)
+- `padding-bottom: env(safe-area-inset-bottom)` for notch devices
+- Graceful fallback with `@supports not (backdrop-filter)`
+- Both light & dark mode variants
 
 ## Upstream Merge Strategy
 
