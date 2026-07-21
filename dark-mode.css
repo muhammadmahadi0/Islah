@@ -42,38 +42,63 @@ body.dark .neu-header .text-emerald-600 {
     color: var(--dark-accent) !important;
 }
 
-/* ── Dark Mode Toggle ── */
-.dark-toggle-btn {
-    width: 36px;
-    height: 36px;
+/* ── Floating Dark Mode Toggle ── */
+.dark-toggle-floating {
+    position: fixed;
+    bottom: 100px;
+    right: 16px;
+    width: 44px;
+    height: 44px;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    transition: all 0.3s ease;
-    font-size: 1.1rem;
-    background: transparent;
+    font-size: 1.15rem;
     border: none;
-    flex-shrink: 0;
-    margin-left: auto;
+    z-index: 45;
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
 }
-body:not(.dark) .dark-toggle-btn {
-    color: #64748b;
-    background: #f1f5f9;
+body:not(.dark) .dark-toggle-floating {
+    color: #475569;
+    background: rgba(255, 255, 255, 0.6);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.6);
 }
-body:not(.dark) .dark-toggle-btn:hover {
-    background: #e2e8f0;
+body:not(.dark) .dark-toggle-floating:hover {
+    background: rgba(255, 255, 255, 0.85);
     color: #1e293b;
+    transform: scale(1.1);
+    box-shadow: 0 6px 24px rgba(0, 0, 0, 0.18);
 }
-body.dark .dark-toggle-btn {
+body.dark .dark-toggle-floating {
     color: #fbbf24;
-    background: var(--dark-surface-2);
+    background: rgba(15, 23, 42, 0.35);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
 }
-body.dark .dark-toggle-btn:hover {
-    background: var(--dark-hover);
+body.dark .dark-toggle-floating:hover {
+    background: rgba(15, 23, 42, 0.55);
     color: #fde68a;
+    transform: scale(1.1);
+    box-shadow: 0 6px 24px rgba(0, 0, 0, 0.4);
 }
+
+@supports not (backdrop-filter: blur(1px)) {
+    body:not(.dark) .dark-toggle-floating {
+        background: rgba(255, 255, 255, 0.85);
+    }
+    body.dark .dark-toggle-floating {
+        background: rgba(15, 23, 42, 0.85);
+    }
+}
+
+/* Remove old inline toggle styles */
+.dark-toggle-btn { display: none; }
 
 /* ── Ticker ── */
 body.dark .ticker-pill-main {
