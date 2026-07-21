@@ -6,9 +6,9 @@
     --dark-bg: #0f172a;
     --dark-surface: #1e293b;
     --dark-surface-2: #273548;
-    --dark-text: #f1f5f9;
-    --dark-text-secondary: #94a3b8;
-    --dark-text-muted: #64748b;
+    --dark-text: #f8fafc;
+    --dark-text-secondary: #cbd5e1;
+    --dark-text-muted: #94a3b8;
     --dark-border: #334155;
     --dark-border-light: #475569;
     --dark-accent: #34d399;
@@ -217,7 +217,7 @@ body.dark .neu-footer {
     }
 }
 body.dark .nav-item {
-    color: rgba(148, 163, 184, 0.8) !important;
+    color: rgba(203, 213, 225, 0.8) !important;
 }
 body.dark .nav-item.active {
     color: var(--dark-accent) !important;
