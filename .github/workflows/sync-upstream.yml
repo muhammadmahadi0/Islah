@@ -1,0 +1,127 @@
+name: Sync Upstream
+
+on:
+  schedule:
+    # Check every Monday at 6:00 UTC
+    - cron: '0 6 * * 1'
+  workflow_dispatch:
+    # Allow manual trigger from GitHub UI
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+
+      - name: Checkout fork
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - name: Add upstream remote & fetch
+        run: |
+          git remote add upstream https://github.com/islahbd/Islah.git
+          git fetch upstream
+
+      - name: Check for upstream changes
+        id: check
+        run: |
+          BEHIND=$(git rev-list --count HEAD..upstream/main 2>/dev/null || echo "0")
+          echo "Commits behind upstream: $BEHIND"
+          echo "behind=$BEHIND" >> $GITHUB_OUTPUT
+
+      - name: Merge upstream/main
+        id: merge
+        if: steps.check.outputs.behind != '0'
+        run: |
+          git config user.email "mh9313777@gmail.com"
+          git config user.name "Muhammad Mahdi (bot)"
+          git merge upstream/main --no-edit 2>&1 || echo "CONFLICT=true" >> $GITHUB_OUTPUT
+
+      - name: Validate HTML files
+        if: steps.merge.outputs.CONFLICT != 'true' && steps.check.outputs.behind != '0'
+        run: |
+          # Quick sanity check: ensure key files exist and HTML is valid
+          echo "::group::Checking required files"
+          for f in index.html style.css app.js dark-mode.css dark-mode.js; do
+            if [ -f "$f" ]; then
+              echo "✅ $f exists ($(wc -l < "$f") lines)"
+            else
+              echo "❌ $f MISSING!"
+              exit 1
+            fi
+          done
+          echo "::endgroup::"
+
+          echo "::group::HTML validation"
+          # Check for basic HTML structure
+          if grep -q '<!DOCTYPE html>' index.html && grep -q '</html>' index.html; then
+            echo "✅ index.html has valid HTML structure"
+          else
+            echo "❌ index.html missing DOCTYPE or closing html tag"
+            exit 1
+          fi
+          echo "::endgroup::"
+
+          echo "::group::Dark mode integrity check"
+          if grep -q 'dark-mode.css' index.html && grep -q 'dark-mode.js' index.html && grep -q 'toggleDarkMode' index.html; then
+            echo "✅ Dark mode references intact"
+          else
+            echo "❌ Dark mode references missing or broken!"
+            exit 1
+          fi
+          echo "::endgroup::"
+
+          echo "::group::CSS/JS no missing deps"
+          # Check that key CSS classes and JS functions aren't stripped
+          grep -q 'neu-footer' style.css && echo "✅ .neu-footer found"
+          grep -q 'dark-toggle-btn' dark-mode.css && echo "✅ .dark-toggle-btn found"
+          grep -q 'toggleDarkMode' dark-mode.js && echo "✅ toggleDarkMode() found"
+          echo "::endgroup::"
+
+      - name: Push merge
+        if: steps.merge.outputs.CONFLICT != 'true' && steps.check.outputs.behind != '0'
+        run: git push origin main
+
+      - name: Create conflict PR
+        if: steps.merge.outputs.CONFLICT == 'true'
+        run: |
+          echo "⚠️ Merge conflict detected! Creating PR for manual resolution..."
+          # Stash the conflicted state
+          git checkout -b auto-merge-conflict
+          git add -A
+          git diff --name-only --diff-filter=U > conflicted-files.txt
+          echo "Conflicted files:"
+          cat conflicted-files.txt
+          git commit -m "Auto-merge conflict state" 2>/dev/null || true
+          git push origin auto-merge-conflict -f
+          gh pr create \
+            --title "⚠️ Merge conflict — upstream changes need manual resolution" \
+            --body "আপস্ট্রীম মার্জ করার সময় কনফ্লিক্ট হয়েছে। নিচের ফাইলগুলো ম্যানুয়ালি রিজল্ভ করে মার্জ করো:
+
+            $(cat conflicted-files.txt)
+
+            ### How to resolve:
+            \`\`\`bash
+            git fetch origin
+            git checkout auto-merge-conflict
+            git merge upstream/main
+            # Fix conflicts, then:
+            git commit -m \"Resolve merge conflicts\"
+            git push origin main
+            \`\`\`" \
+            --base main \
+            --head auto-merge-conflict \
+            --label "merge-conflict" 2>/dev/null || echo "gh PR creation skipped (no token)"
+
+      - name: Report status
+        if: always()
+        run: |
+          echo "=== Sync Summary ==="
+          echo "Upstream checked: islahbd/Islah main"
+          echo "Behind: ${{ steps.check.outputs.behind }} commits"
+          echo "Conflict: ${{ steps.merge.outputs.CONFLICT || 'false' }}"

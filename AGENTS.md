@@ -48,6 +48,26 @@ git merge upstream/main
 # dark-mode.css and dark-mode.js never conflict
 ```
 
+### Auto-Sync (GitHub Actions)
+
+A scheduled workflow (`.github/workflows/sync-upstream.yml`) runs every **Monday at 6:00 UTC** to:
+
+1. Fetch the latest from `islahbd/Islah`
+2. Merge into `main`
+3. **Validate**: checks file integrity, HTML structure, dark mode references
+4. Push if all good
+5. If merge conflicts arise → creates a PR for manual resolution
+
+Trigger manually from GitHub Actions → `Sync Upstream` → `workflow_dispatch`.
+
+### Validation Checks
+
+The workflow verifies:
+- `index.html`, `style.css`, `app.js`, `dark-mode.css`, `dark-mode.js` exist
+- HTML has valid `<!DOCTYPE html>` structure
+- Dark mode references (`dark-mode.css`, `dark-mode.js`, `toggleDarkMode`) intact
+- Key CSS classes present (`neu-footer`, `dark-toggle-btn`)
+
 ## Adding New Dark Mode Rules
 
 1. Open `dark-mode.css`
