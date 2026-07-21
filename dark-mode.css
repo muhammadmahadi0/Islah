@@ -195,7 +195,7 @@ body.dark .social-card:nth-child(6) {
     border-color: #4a352a !important;
 }
 body.dark .social-footer {
-    color: var(--dark-text-muted) !important;
+    color: #cbd5e1 !important;
 }
 
 /* ── Footer Nav ── */
