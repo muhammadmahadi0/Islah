@@ -14,6 +14,8 @@
     <link href="https://fonts.maateen.me/solaiman-lipi/font.css" rel="stylesheet">
     
     <link rel="stylesheet" href="style.css?v=1.1">
+    <link rel="stylesheet" href="dark-mode.css?v=1.0">
+    <meta name="color-scheme" content="light dark">
 </head>
 
 <body>
@@ -37,6 +39,11 @@
                         দামাত বারাকাতুহুম
                     </p>
                 </div>
+                <!-- Dark Mode Toggle -->
+                <button id="dark-mode-toggle" onclick="toggleDarkMode()"
+                    class="dark-toggle-btn" title="ডার্ক মোড টগল">
+                    <i class="fas fa-moon"></i>
+                </button>
             </div>
         </header>
 
@@ -319,6 +326,7 @@
     </div>
 
     <script src="app.js?v=1.2"></script>
+    <script src="dark-mode.js?v=1.0"></script>
 </body>
 
 </html>

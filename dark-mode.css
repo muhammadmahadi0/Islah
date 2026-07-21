@@ -1,0 +1,381 @@
+/* ========== Dark Mode Styles ==========
+ * Separate file to avoid merge conflicts with upstream style.css
+ * Toggle with <body class="dark"> or localStorage
+ */
+:root {
+    --dark-bg: #0f172a;
+    --dark-surface: #1e293b;
+    --dark-surface-2: #273548;
+    --dark-text: #f1f5f9;
+    --dark-text-secondary: #94a3b8;
+    --dark-text-muted: #64748b;
+    --dark-border: #334155;
+    --dark-border-light: #475569;
+    --dark-accent: #34d399;
+    --dark-accent-bg: rgba(52, 211, 153, 0.1);
+    --dark-hover: #334155;
+    --dark-card-overlay: rgba(0,0,0,0.6);
+}
+
+/* ── Base ── */
+body.dark,
+body.dark #app-container {
+    background-color: var(--dark-bg) !important;
+    color: var(--dark-text);
+}
+
+/* ── Header ── */
+body.dark .neu-header {
+    background: var(--dark-surface) !important;
+    border-bottom-color: var(--dark-border) !important;
+}
+
+body.dark .neu-header h1 {
+    color: var(--dark-text) !important;
+}
+
+body.dark .neu-header .text-slate-500 {
+    color: var(--dark-text-secondary) !important;
+}
+
+body.dark .neu-header .text-emerald-600 {
+    color: var(--dark-accent) !important;
+}
+
+/* ── Dark Mode Toggle ── */
+.dark-toggle-btn {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 1.1rem;
+    background: transparent;
+    border: none;
+    flex-shrink: 0;
+    margin-left: auto;
+}
+body:not(.dark) .dark-toggle-btn {
+    color: #64748b;
+    background: #f1f5f9;
+}
+body:not(.dark) .dark-toggle-btn:hover {
+    background: #e2e8f0;
+    color: #1e293b;
+}
+body.dark .dark-toggle-btn {
+    color: #fbbf24;
+    background: var(--dark-surface-2);
+}
+body.dark .dark-toggle-btn:hover {
+    background: var(--dark-hover);
+    color: #fde68a;
+}
+
+/* ── Ticker ── */
+body.dark .ticker-pill-main {
+    background: var(--dark-surface) !important;
+    border-color: var(--dark-border) !important;
+}
+body.dark .ticker-scroll-content {
+    color: var(--dark-text-secondary) !important;
+}
+body.dark section.p-0 {
+    background-color: var(--dark-surface) !important;
+}
+
+body.dark .ticker-label-raised {
+    background: #b45309 !important;
+}
+
+/* ── Slider ── */
+body.dark .slider-container {
+    background: var(--dark-bg);
+}
+
+/* ── Section titles ── */
+body.dark .neu-section-title {
+    border-bottom-color: var(--dark-border) !important;
+}
+body.dark .neu-section-title h2 {
+    color: var(--dark-text) !important;
+}
+body.dark .neu-section-title .accent-bar {
+    background: var(--dark-accent) !important;
+}
+body.dark .neu-section-title .text-slate-400 {
+    color: var(--dark-text-muted) !important;
+}
+
+/* ── Bayan Cards ── */
+body.dark .bayan-card {
+    background: var(--dark-surface) !important;
+    border-color: var(--dark-border) !important;
+}
+body.dark .bayan-card:nth-child(2n) {
+    background: var(--dark-surface-2) !important;
+    border-color: var(--dark-border-light) !important;
+}
+body.dark .bayan-card:nth-child(3n) {
+    background: var(--dark-surface) !important;
+    border-color: var(--dark-border) !important;
+}
+body.dark .bayan-card:nth-child(4n) {
+    background: var(--dark-surface-2) !important;
+    border-color: var(--dark-border-light) !important;
+}
+body.dark .bayan-card .pill-text {
+    color: var(--dark-text) !important;
+}
+body.dark .bayan-card .pill-icon {
+    color: var(--dark-accent) !important;
+}
+body.dark .glow-pill {
+    border-bottom-color: var(--dark-border) !important;
+}
+body.dark .bayan-date-box {
+    border-right-color: var(--dark-border) !important;
+}
+body.dark .bayan-day-month {
+    color: var(--dark-text-secondary) !important;
+}
+body.dark .bayan-day-name {
+    color: #f87171 !important;
+}
+body.dark .bayan-date-num {
+    color: var(--dark-text) !important;
+}
+body.dark .bayan-location {
+    color: var(--dark-text) !important;
+}
+body.dark .bayan-details {
+    color: var(--dark-text-secondary) !important;
+}
+body.dark .bayan-details .label {
+    color: var(--dark-text-muted) !important;
+}
+body.dark .bayan-info-box .text-gray-800 {
+    color: var(--dark-text-secondary) !important;
+}
+
+body.dark #schedule-section {
+    background: var(--dark-bg) !important;
+}
+
+/* ── Social Cards ── */
+body.dark .social-card {
+    background: var(--dark-surface) !important;
+    border-color: var(--dark-border) !important;
+}
+body.dark .social-card:nth-child(1) {
+    background: #1e1b1b !important;
+    border-color: #3b2a2a !important;
+}
+body.dark .social-card:nth-child(2) {
+    background: #1b1e2e !important;
+    border-color: #2a2f4a !important;
+}
+body.dark .social-card:nth-child(3) {
+    background: #1b2e1b !important;
+    border-color: #2a4a2a !important;
+}
+body.dark .social-card:nth-child(4) {
+    background: #1b252e !important;
+    border-color: #2a3d4a !important;
+}
+body.dark .social-card:nth-child(5) {
+    background: #1e1b2e !important;
+    border-color: #2f2a4a !important;
+}
+body.dark .social-card:nth-child(6) {
+    background: #2e221b !important;
+    border-color: #4a352a !important;
+}
+body.dark .social-footer {
+    color: var(--dark-text-muted) !important;
+}
+
+/* ── Footer Nav ── */
+body.dark .neu-footer {
+    background: var(--dark-surface) !important;
+    border-top-color: var(--dark-border) !important;
+}
+body.dark .nav-item {
+    color: var(--dark-text-muted) !important;
+}
+body.dark .nav-item.active {
+    color: var(--dark-accent) !important;
+}
+body.dark .nav-item.active i {
+    filter: drop-shadow(0 0 5px rgba(52, 211, 153, 0.3));
+}
+
+/* ── Intro Modal ── */
+body.dark #intro-modal .bg-white,
+body.dark #intro-modal div.bg-white {
+    background: var(--dark-surface) !important;
+}
+body.dark #intro-modal .text-gray-700 {
+    color: var(--dark-text-secondary) !important;
+}
+body.dark #intro-modal .text-emerald-900 {
+    color: var(--dark-accent) !important;
+}
+body.dark #intro-modal .text-slate-500 {
+    color: var(--dark-text-muted) !important;
+}
+body.dark #intro-modal .text-emerald-800 {
+    color: #6ee7b7 !important;
+}
+body.dark #intro-modal .bg-emerald-100 {
+    background: rgba(52, 211, 153, 0.15) !important;
+    border-color: var(--dark-accent) !important;
+}
+body.dark #intro-modal button.bg-emerald-600 {
+    background: #059669 !important;
+}
+body.dark #intro-modal button.bg-emerald-600:hover {
+    background: #10b981 !important;
+}
+
+/* ── Majlis Modal ── */
+body.dark #majlis-modal .bg-white,
+body.dark #majlis-modal div.bg-white {
+    background: var(--dark-surface) !important;
+}
+body.dark #majlis-modal .bg-emerald-600 {
+    background: var(--dark-surface-2) !important;
+    color: var(--dark-accent) !important;
+    border-bottom: 1px solid var(--dark-border) !important;
+}
+body.dark #majlis-modal h3 {
+    color: var(--dark-text) !important;
+}
+body.dark #majlis-modal .bg-gray-50 {
+    background: var(--dark-bg) !important;
+    border-top-color: var(--dark-border) !important;
+}
+body.dark #majlis-modal button.bg-emerald-600 {
+    background: #059669 !important;
+    color: white !important;
+}
+body.dark #majlis-modal button.bg-emerald-600:hover {
+    background: #10b981 !important;
+}
+body.dark #majlis-modal .border-t {
+    border-top-color: var(--dark-border) !important;
+}
+
+/* ── Majlis Detail Card ── */
+body.dark .majlis-detail-card {
+    background: var(--dark-surface) !important;
+    border-color: var(--dark-border) !important;
+}
+body.dark .majlis-detail-card .text-slate-700,
+body.dark .majlis-detail-card .text-slate-800 {
+    color: var(--dark-text) !important;
+}
+body.dark .majlis-detail-card .text-slate-500 {
+    color: var(--dark-text-secondary) !important;
+}
+body.dark .majlis-detail-card .border-b {
+    border-bottom-color: var(--dark-border) !important;
+}
+body.dark .majlis-detail-card .text-slate-500 {
+    color: var(--dark-text-secondary) !important;
+}
+
+/* ── Majlis Calendar ── */
+body.dark .calendar-header-month {
+    color: var(--dark-text) !important;
+}
+body.dark .calendar-header-year {
+    color: #f87171 !important;
+}
+body.dark .calendar-nav-btn {
+    color: var(--dark-text-muted) !important;
+}
+body.dark .calendar-nav-btn:hover {
+    color: var(--dark-text) !important;
+}
+body.dark .calendar-day-label {
+    color: var(--dark-text-muted) !important;
+}
+body.dark .calendar-day {
+    color: var(--dark-text-secondary) !important;
+}
+body.dark .calendar-day:hover:not(.empty) {
+    background: var(--dark-accent-bg) !important;
+    color: var(--dark-accent) !important;
+}
+body.dark .calendar-day.highlight {
+    background: rgba(52, 211, 153, 0.2) !important;
+    color: var(--dark-accent) !important;
+}
+body.dark .calendar-day.today {
+    background: rgba(52, 211, 153, 0.15) !important;
+    border-color: var(--dark-accent) !important;
+    color: #6ee7b7 !important;
+}
+body.dark .calendar-day.active-sidebar {
+    background: var(--dark-surface) !important;
+    box-shadow: 0 0 0 2px var(--dark-accent) !important;
+}
+
+/* ── Sidebar ── */
+body.dark #majlis-main-wrapper {
+    background: var(--dark-surface) !important;
+}
+body.dark .sidebar-event-card {
+    background: var(--dark-surface-2) !important;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.3);
+}
+body.dark .sidebar-day-month {
+    color: var(--dark-text-secondary) !important;
+}
+body.dark .sidebar-day-name {
+    color: #f87171 !important;
+}
+body.dark .sidebar-date-large {
+    color: var(--dark-text) !important;
+}
+body.dark .sidebar-event-entry {
+    color: var(--dark-text-secondary) !important;
+}
+body.dark .sidebar-event-entry .time {
+    color: var(--dark-accent) !important;
+}
+body.dark .see-more-link {
+    background: var(--dark-surface) !important;
+    color: var(--dark-text-muted) !important;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.3);
+}
+body.dark .see-more-link:hover {
+    color: #60a5fa !important;
+}
+
+/* ── Majlis Modal OK button area ── */
+body.dark #majlis-modal button.bg-slate-100 {
+    background: var(--dark-surface-2) !important;
+    color: var(--dark-text-muted) !important;
+}
+body.dark #majlis-modal button.bg-slate-100:hover {
+    background: var(--dark-hover) !important;
+    color: var(--dark-text) !important;
+}
+
+/* ── Section backgrounds ── */
+body.dark #majlis-section {
+    background: transparent !important;
+}
+body.dark #links-section {
+    background: transparent !important;
+}
+
+/* ── Slider indicators ── */
+body.dark .indicator {
+    border-color: rgba(255,255,255,0.3) !important;
+}
