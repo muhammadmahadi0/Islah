@@ -208,8 +208,8 @@ body.dark .neu-footer {
     background: rgba(15, 23, 42, 0.45) !important;
     backdrop-filter: blur(24px);
     -webkit-backdrop-filter: blur(24px);
-    border-top: 1px solid rgba(255, 255, 255, 0.06) !important;
-    box-shadow: 0 -4px 30px rgba(0, 0, 0, 0.3) !important;
+    border: 1px solid rgba(255, 255, 255, 0.06) !important;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.35) !important;
 }
 @supports not (backdrop-filter: blur(1px)) {
     body.dark .neu-footer {
